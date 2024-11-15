@@ -18,8 +18,16 @@ It uses Selenium Web Driver to carry our E2E testing of an ecommerce website cal
 - Clicking buttons
 - Logging Out
 
+# Test Reporting
+
+Used Allure. Commands used to generate report:
+1. pytest --alluredir=allure-results
+2. allure serve allure-results
+
+
 # Technologies Used
 - Python Language
 - IDE (Visual Studio Code or PyCharm)
 - Selenium and Pytest
+- Allure
 - Test Browsers Chrome, Edge, Firefox
