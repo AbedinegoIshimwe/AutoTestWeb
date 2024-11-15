@@ -34,13 +34,18 @@ jobs:
         run: |
           pytest --alluredir=allure-results
 
-      # Step 5: Generate Allure report
+      # Step 5: Install Allure Command Line using npm
+      - name: Install Allure Command Line
+        run: |
+          sudo apt-get install -y nodejs npm
+          sudo npm install -g allure-commandline --save-dev
+
+      # Step 6: Generate Allure report
       - name: Generate Allure report
         run: |
-          pip install allure-pytest
           allure generate allure-results -o allure-report --clean
 
-      # Step 6: Upload Allure report as an artifact
+      # Step 7: Upload Allure report as an artifact
       - name: Upload Allure report
         uses: actions/upload-artifact@v3
         with:
