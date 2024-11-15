@@ -1,0 +1,55 @@
+name: Allure CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test --alluredir=allure-results  # Generates Allure test results
+
+      # Step 5: Generate Allure report
+      - name: Generate Allure report
+        run: |
+          npm install allure-commandline --save-dev
+          allure generate allure-results -o allure-report --clean
+
+      # Step 6: Upload the Allure report as an artifact
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production..."
+          # Insert deployment script here, e.g., uploading to a server or deploying to a cloud provider
