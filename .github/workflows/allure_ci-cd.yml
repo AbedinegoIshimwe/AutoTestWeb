@@ -29,7 +29,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests with Selenium
+      # Step 4: Run tests with Selenium and store the results
       - name: Run tests with Selenium
         run: |
           pytest --alluredir=allure-results
@@ -37,8 +37,9 @@ jobs:
       # Step 5: Install Allure Command Line Tool via npm
       - name: Install Allure Command Line Tool
         run: |
+          sudo apt-get update
           sudo apt-get install -y nodejs npm
-          sudo npm install -g allure-commandline
+          sudo npm install -g allure-commandline --save-dev
 
       # Step 6: Generate Allure report
       - name: Generate Allure report
@@ -51,4 +52,5 @@ jobs:
         with:
           name: allure-report
           path: allure-report
+
 
