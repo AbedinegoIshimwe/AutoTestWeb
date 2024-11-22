@@ -17,6 +17,7 @@ It uses Selenium Web Driver to carry our E2E testing of an ecommerce website cal
 - Adding items to a cart
 - Clicking buttons
 - Logging Out
+- Perfomace test (Page Loading time)
 
 # Test Reporting
 
